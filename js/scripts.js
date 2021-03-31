@@ -6,14 +6,21 @@ function noInputtedWord(word, text) {
   }
 }
 
-// Business Logic
+function replacePunctuationWithSpace(text) {
+  return text.replace(/[!@#$%^&*()?,;:\.\s]+/g," ")
+}
 
 function wordCounter(text) {
   if (text.trim().length === 0) {
     return 0;
   }
+  console.log("Counting words...")
   let wordCount = 0;
-  const wordArray = text.split(" ");
+  const noPunctuationText = replacePunctuationWithSpace(text).trim();
+  console.dir(noPunctuationText)
+  const wordArray = noPunctuationText.split(" ");
+  console.dir(wordArray)
+
   wordArray.forEach(function(element) {
     if (!Number(element)) {
       wordCount++;
@@ -26,7 +33,13 @@ function numberOfOccurrencesInText(word, text) {
   if (noInputtedWord(word, text)) {
     return 0;
   }
-  const wordArray = text.split(" ");
+  console.log("Counting # occurrences...")
+  const noPunctuationText = replacePunctuationWithSpace(text).trim();
+  console.dir(noPunctuationText)
+
+  const wordArray = noPunctuationText.split(" ");
+  console.dir(wordArray)
+
   let wordCount = 0;
   wordArray.forEach(function(element) {
     if (element.toLowerCase().includes(word.toLowerCase())) {
@@ -86,6 +99,7 @@ function threeMostCommonWords(text) {
   })
   if (allCountsAreEqual) return mostCommonWords;
 
+  // now we know there is at least one duplicated word...
   // compare the counts of each word, looking for the highest numbers
   // when we change the position of wordCounts (sorting big to small), we also must change the position in allWords
   // let largest1, largest2, largest3;
@@ -130,6 +144,3 @@ $(document).ready(function(){
 });
 
 
-function replacePunctuationWithSpace(text) {
-  return text.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
-}
