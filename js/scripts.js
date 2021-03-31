@@ -1,10 +1,38 @@
-function noInputtedWord(word, text) {
-  if ((text.trim().length === 0) || (word.trim().length === 0)) {
-    return true
-  } else {
-    return false
-  }
-}
+// For comparison: noInputtedWord() and wordCounter(text) from lesson
+
+// function noInputtedWord() {
+//   for (let i=0; i < arguments.length; i++) {
+//     console.log(arguments[i]);
+//     if (arguments[i].trim().length === 0) {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
+
+// function wordCounter(text) {
+//   if (noInputtedWord(text)) {
+//     return 0;
+//   }
+//   let wordCount = 0;
+//   const wordArray = text.split(" ");
+//   wordArray.forEach(function(element) {
+//     if (!Number(element)) {
+//       wordCount++;
+//     }
+//   });
+//   return wordCount;
+// }
+
+// function noInputtedWord(word, text) {
+//   if ((text.trim().length === 0) || (word.trim().length === 0)) {
+//     return true
+//   } else {
+//     return false
+//   }
+// }
+
+// Go here to interpret those symbols: https://regexr.com/
 
 function replacePunctuationWithSpace(text) {
   return text.replace(/[!@#$%^&*()?,;:\.\s]+/g," ").trim()
