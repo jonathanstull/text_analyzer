@@ -7,19 +7,19 @@ function noInputtedWord(word, text) {
 }
 
 function replacePunctuationWithSpace(text) {
-  return text.replace(/[!@#$%^&*()?,;:\.\s]+/g," ")
+  return text.replace(/[!@#$%^&*()?,;:\.\s]+/g," ").trim()
 }
 
 function wordCounter(text) {
   if (text.trim().length === 0) {
     return 0;
   }
-  console.log("Counting words...")
+  // console.log("Counting words...")
   let wordCount = 0;
   const noPunctuationText = replacePunctuationWithSpace(text).trim();
-  console.dir(noPunctuationText)
+  // console.dir(noPunctuationText)
   const wordArray = noPunctuationText.split(" ");
-  console.dir(wordArray)
+  // console.dir(wordArray)
 
   wordArray.forEach(function(element) {
     if (!Number(element)) {
@@ -33,16 +33,16 @@ function numberOfOccurrencesInText(word, text) {
   if (noInputtedWord(word, text)) {
     return 0;
   }
-  console.log("Counting # occurrences...")
+  // console.log("Counting # occurrences...")
   const noPunctuationText = replacePunctuationWithSpace(text).trim();
-  console.dir(noPunctuationText)
+  // console.dir(noPunctuationText)
 
   const wordArray = noPunctuationText.split(" ");
-  console.dir(wordArray)
+  // console.dir(wordArray)
 
   let wordCount = 0;
   wordArray.forEach(function(element) {
-    if (element.toLowerCase().includes(word.toLowerCase())) {
+    if (element.toLowerCase() === word.toLowerCase()) {
       wordCount++;
     }
   });
@@ -57,6 +57,7 @@ function threeMostCommonWords(text) {
   if (allWords.length === 0) return mostCommonWords;
   // from here on down, there is are least 1 element in the array
 
+  // TODO - this doesn't check if there are duplicates; move down? remove?
   if ((allWords.length >= 1) && (allWords.length <= 3)) return allWords;
   // at this point, we know there are more than 3 elements (4+)
 
@@ -116,15 +117,17 @@ function boldPassage(word, text) {
     return "";
   }
   let htmlString = "<p>"
-  let textArray = text.split(" ");
+  const noPunctuationText = replacePunctuationWithSpace(text).trim();
+  let textArray = noPunctuationText.split(" ");
+
   textArray.forEach(function(element, index) {
-    if (element.toLowerCase().includes(word.toLowerCase())) {
-      htmlString = htmlString.concat("<b>" + element + "</b>");
+    if (element.toLowerCase() === word.toLowerCase()) {
+      htmlString += "<b>" + element + "</b>";
     } else {
-      htmlString = htmlString.concat(element);
+      htmlString += element;
     }
     if (index !== (textArray.length - 1)) {
-      htmlString = htmlString.concat(" ");
+      htmlString += " ";
     }
   });
   return htmlString + "</p>";
